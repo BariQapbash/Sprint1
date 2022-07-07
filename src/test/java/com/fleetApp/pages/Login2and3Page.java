@@ -10,13 +10,19 @@ public class Login2and3Page extends BasePage {
     //---locators----------------
 
     @FindBy(id = "prependedInput")
-    private WebElement usernameField;
+    public WebElement usernameField;
 
     @FindBy(id = "prependedInput2")
-    private WebElement passwordField;
+    public WebElement passwordField;
 
     @FindBy(id = "_submit")
-    private WebElement loginBtn;
+    public WebElement loginBtn;
+
+
+    @FindBy(xpath = "//div[@class='alert alert-error']")
+    public WebElement WarningMessage;
+
+
 
 
 
@@ -32,15 +38,15 @@ public class Login2and3Page extends BasePage {
         String password = "";
         String username = "";
 
-        if (userType.equals("Driver")) {
+        if (userType.equalsIgnoreCase("Driver")) {
             username = ConfigurationReader.get("driver_username");
             password = ConfigurationReader.get("driver_password");
         }
-        else if (userType.equals("Sales Manager")) {
+        else if (userType.equalsIgnoreCase("Sales Manager")) {
             username = ConfigurationReader.get("sales_manager_username");
             password = ConfigurationReader.get("sales_manager_password");
         }
-        else if (userType.equals("Store Manager")) {
+        else if (userType.equalsIgnoreCase("Store Manager")) {
             username = ConfigurationReader.get("store_manager_username");
             password = ConfigurationReader.get("store_manager_password");
         }
@@ -60,5 +66,6 @@ public class Login2and3Page extends BasePage {
     public String getPageTitle(){
         return driver.getTitle();
     }
+
 
 }

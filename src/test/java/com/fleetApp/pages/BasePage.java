@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
 
-    protected WebDriver driver;
+    public WebDriver driver;
 
     //constructor
     BasePage() {
