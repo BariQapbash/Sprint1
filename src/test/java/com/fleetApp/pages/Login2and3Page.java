@@ -1,6 +1,9 @@
 package com.fleetApp.pages;
 
 import com.fleetApp.utilities.ConfigurationReader;
+import com.fleetApp.utilities.Driver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -20,7 +23,38 @@ public class Login2and3Page extends BasePage {
 
 
     @FindBy(xpath = "//div[@class='alert alert-error']")
-    public WebElement WarningMessage;
+    public WebElement warningMessage;
+
+    @FindBy(linkText = "Forgot your password?")
+    public WebElement forgotPassword;
+
+    @FindBy(xpath = "//span[@class='custom-checkbox__icon']")
+    public  WebElement rememberMeCheckBox;
+
+
+
+    public String errorMessageText(String field) {
+
+        String message = null;
+
+        try {
+            if (field.equals("username")) {
+                JavascriptExecutor js = (JavascriptExecutor) Driver.get();
+                message = (String) js.executeScript("return arguments[0].validationMessage;", usernameField);
+            } else if (field.equals("password")) {
+                JavascriptExecutor js = (JavascriptExecutor) Driver.get();
+                message = (String) js.executeScript("return arguments[0].validationMessage;", passwordField);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(message);
+        return message;
+
+    }
+
+
+
 
 
 
@@ -66,6 +100,10 @@ public class Login2and3Page extends BasePage {
     public String getPageTitle(){
         return driver.getTitle();
     }
+
+
+
+
 
 
 }
